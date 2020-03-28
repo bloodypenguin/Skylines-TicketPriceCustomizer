@@ -35,6 +35,11 @@ namespace TicketPriceCustomizer
         public ushort BlimpPrice { get; set; } = 115;
         [Textfield("Sightseeing bus ticket price", Prices, typeof(PriceCustomization), nameof(PriceCustomization.SetSightseeingBusPrice))]
         public ushort SightseeingBusPrice { get; set; } = 3000;
-
+        [Textfield("Trolleybus ticket price", Prices, typeof(PriceCustomization), nameof(PriceCustomization.SetTrolleybusPrice))]
+        public ushort TrolleybusPrice { get; set; } = 80;
+        [Textfield("Helicopter ticket price", Prices, typeof(PriceCustomization), nameof(PriceCustomization.SetHelicopterPrice))]
+        public ushort HelicopterPrice { get; set; } = 115;
+        [Textfield("Intercity bus ticket price", Prices, typeof(PriceCustomization), nameof(PriceCustomization.SetIntercityBusPrice))]
+        public ushort IntercityBusPrice { get; set; } = 100;
     }
 }

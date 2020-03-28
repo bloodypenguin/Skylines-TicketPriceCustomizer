@@ -20,6 +20,9 @@ namespace TicketPriceCustomizer
             SetCableCarPrice(options.FerryPrice);
             SetMonorailPrice(options.MonorailPrice);
             SetSightseeingBusPrice(options.SightseeingBusPrice);
+            SetIntercityBusPrice(options.IntercityBusPrice);
+            SetHelicopterPrice(options.HelicopterPrice);
+            SetTrolleybusPrice(options.TrolleybusPrice);
         }
 
         public static void SetSightseeingBusPrice(ushort price)
@@ -80,6 +83,21 @@ namespace TicketPriceCustomizer
         public static void SetTaxiPrice(ushort price)
         {
             SetPrice(price, "Taxi");
+        }
+        
+        public static void SetTrolleybusPrice(ushort price)
+        {
+            SetPrice(price, "Trolleybus");
+        }
+
+        public static void SetHelicopterPrice(ushort price)
+        {
+            SetPrice(price, "Helicopter");
+        }
+        
+        public static void SetIntercityBusPrice(ushort price)
+        {
+            SetPrice(price, "Intercity Bus");
         }
 
         private static void SetPrice(ushort price, string type)
