@@ -1,4 +1,5 @@
 ﻿using System;
+using ColossalFramework;
 using ColossalFramework.IO;
 using UnityEngine;
 
@@ -111,20 +112,32 @@ namespace TicketPriceCustomizer
             {
                 return;
             }
-            info.m_ticketPrice = price;
+            SetInfoPrice(info, price);
             for (ushort i = 0; i < TransportManager.instance.m_lines.m_size; i++)
             {
-                SetPrice(info, ref TransportManager.instance.m_lines.m_buffer[i], price);
+                SetLinePrice(i,info, ref TransportManager.instance.m_lines.m_buffer[i], price);
             }
         }
 
-        private static void SetPrice(TransportInfo info, ref TransportLine line, ushort price)
+        private static void SetInfoPrice(TransportInfo info, ushort price)
         {
-            if (line.Info == info)
+            if (info.m_ticketPrice == price)
             {
-                line.m_ticketPrice = price;
-                //UnityEngine.Debug.Log("Transport line " + line.m_lineNumber + ", new price: " + line.m_ticketPrice);
+               return; 
             }
+            UnityEngine.Debug.Log($"TicketPriceCustomizer: Transport info: {info.name}, was price: {info.m_ticketPrice}, new price: {price}");
+            info.m_ticketPrice = price;
+        }
+
+        private static void SetLinePrice(ushort lineId, TransportInfo info, ref TransportLine line, ushort price)
+        {
+            if ((line.m_flags & TransportLine.Flags.Created) == TransportLine.Flags.None || line.Info != info ||
+                price == line.m_ticketPrice)
+            {
+                return;
+            }
+            UnityEngine.Debug.Log($"TicketPriceCustomizer: Transport line id: {lineId}, #{line.m_lineNumber}, name: {Singleton<TransportManager>.instance.GetLineName(lineId)}, was price: {line.m_ticketPrice}, new price: {price}");
+            line.m_ticketPrice = price;
         }
     }
 }
