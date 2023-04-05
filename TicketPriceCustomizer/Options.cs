@@ -9,7 +9,7 @@ namespace TicketPriceCustomizer
     [Options("TicketPriceCustomizer")]
     public class Options
     {
-        private const string Prices = "Ticket prices, multiplied by 100";
+        private const string Prices = "Ticket prices, multiplied by 100. Enter 320 to set ticket price 3,20 for example.";
 
         [Textfield("Bus ticket price", Prices, typeof(PriceCustomization), nameof(PriceCustomization.SetBusPrice))]
         public ushort BusPrice { get; set; } = 100;
