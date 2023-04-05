@@ -18,7 +18,7 @@ namespace TicketPriceCustomizer
             SetTramPrice(options.TramPrice);
             SetBlimpPrice(options.BlimpPrice);
             SetFerryPrice(options.FerryPrice);
-            SetCableCarPrice(options.FerryPrice);
+            SetCableCarPrice(options.CableCarPrice);
             SetMonorailPrice(options.MonorailPrice);
             SetSightseeingBusPrice(options.SightseeingBusPrice);
             SetIntercityBusPrice(options.IntercityBusPrice);
