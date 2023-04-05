@@ -103,19 +103,29 @@ namespace TicketPriceCustomizer
 
         private static void SetPrice(ushort price, string type)
         {
-            if (!LoadingExtension.InGame)
+            try
             {
-                return;
+                if (!LoadingExtension.InGame)
+                {
+                    return;
+                }
+
+                var info = PrefabCollection<TransportInfo>.FindLoaded(type);
+                if (info == null)
+                {
+                    return;
+                }
+
+                SetInfoPrice(info, price);
+                for (ushort i = 0; i < TransportManager.instance.m_lines.m_size; i++)
+                {
+                    SetLinePrice(i, info, ref TransportManager.instance.m_lines.m_buffer[i], price);
+                }
             }
-            var info = PrefabCollection<TransportInfo>.FindLoaded(type);
-            if (info == null)
+            catch (Exception e)
             {
-                return;
-            }
-            SetInfoPrice(info, price);
-            for (ushort i = 0; i < TransportManager.instance.m_lines.m_size; i++)
-            {
-                SetLinePrice(i,info, ref TransportManager.instance.m_lines.m_buffer[i], price);
+                UnityEngine.Debug.LogError($"TicketPriceCustomizer: There was an error setting ticket price {price} for transport type {type}");
+                UnityEngine.Debug.LogException(e);
             }
         }
 
